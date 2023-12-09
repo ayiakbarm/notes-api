@@ -2,3 +2,4 @@ node_modules
 .vscode
 notes-app-server.pem
 .gitignore
+.env*
