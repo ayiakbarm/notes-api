@@ -60,8 +60,8 @@ class AuthenticationsHandler {
       this._validator.validatePutAuthenticationPayload(request.payload);
 
       const { refreshToken } = request.payload;
-      await this._authenticationsService.verifyRefreshToken(refreshToken);
-      const { id } = this._tokenManager.verifyRefreshToken(refreshToken);
+      await this._authenticationsService.verifyRefreshTokenFromDb(refreshToken);
+      const { id } = this._tokenManager.verifyRefreshTokenFromDb(refreshToken);
 
       const accessToken = this._tokenManager.generateAccessToken({ id });
       return {
@@ -97,7 +97,7 @@ class AuthenticationsHandler {
       this._validator.validateDeleteAuthenticationPayload(request.payload);
 
       const { refreshToken } = request.payload;
-      await this._authenticationsService.verifyRefreshToken(refreshToken);
+      await this._authenticationsService.verifyRefreshTokenFromDb(refreshToken);
       await this._authenticationsService.deleteRefreshToken(refreshToken);
 
       return {
